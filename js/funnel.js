@@ -21,14 +21,26 @@ const ctx = confettiCanvas.getContext('2d');
 
 // ===== Progress Map =====
 const progressMap = {
-    1: 0,
-    2: 12,
-    3: 25,
-    4: 40,
-    5: 55,
-    6: 70,
-    7: 85,
+    1: 5,
+    2: 20,
+    3: 35,
+    4: 50,
+    5: 65,
+    6: 80,
+    7: 90,
     8: 100
+};
+
+// ===== Step Label Map =====
+const stepLabelMap = {
+    1: 'Step 1 of 5',
+    2: 'Searching...',
+    3: 'Found!',
+    4: 'Step 2 of 5',
+    5: 'Step 3 of 5',
+    6: 'Step 4 of 5',
+    7: 'Finalizing...',
+    8: 'Step 5 of 5'
 };
 
 // ===== Confetti System =====
@@ -155,9 +167,12 @@ function showQuizStep(stepNum) {
     document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
     document.getElementById(`quizStep${stepNum}`).classList.add('active');
     currentStep = stepNum;
-    const percent = progressMap[stepNum] || 0;
+    const percent = progressMap[stepNum] || 5;
     progressFill.style.width = `${percent}%`;
-    document.getElementById('modalProgressPercent').textContent = `${percent}%`;
+    const labelEl = document.getElementById('modalProgressLabel');
+    if (labelEl) {
+        labelEl.textContent = stepLabelMap[stepNum] || `Step ${stepNum}`;
+    }
 }
 
 function calculateCash() {
@@ -484,3 +499,22 @@ showQuizStep = function(stepNum) {
 
 // ===== Show first step =====
 showQuizStep(1);
+
+// ===== Disclosure Modal =====
+const disclosureOverlay = document.getElementById('disclosureModalOverlay');
+const openDisclosureBtn = document.getElementById('openDisclosureModal');
+const closeDisclosureBtn = document.getElementById('closeDisclosureModal');
+
+openDisclosureBtn.addEventListener('click', function() {
+    disclosureOverlay.classList.add('active');
+});
+
+closeDisclosureBtn.addEventListener('click', function() {
+    disclosureOverlay.classList.remove('active');
+});
+
+disclosureOverlay.addEventListener('click', function(e) {
+    if (e.target === disclosureOverlay) {
+        disclosureOverlay.classList.remove('active');
+    }
+});

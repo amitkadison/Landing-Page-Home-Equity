@@ -284,50 +284,74 @@
     <!-- ========== QUIZ MODAL (Pop-up) ========== -->
     <div class="quiz-modal" id="quizModal">
         <div class="modal-container">
-            <!-- Modal Header - Trust Header Design -->
+            <!-- Modal Header - Split Header Design -->
             <div class="modal-header">
-                <!-- Top: Centered Logo -->
-                <div class="modal-logo-wrapper">
-                    <img src="../images/image-removebg-preview (3).png" alt="HomeEquity" class="modal-logo-img">
+                <!-- ZONE 1: Brand Header (Colored Background) -->
+                <div class="brand-header-zone">
+                    <!-- Advertising Disclosure (Top Right) -->
+                    <div class="header-ad-disclosure">
+                        <span class="header-disclosure-link" id="openDisclosureModal">Advertising Disclosure</span>
+                    </div>
+                    <!-- Centered Logo -->
+                    <div class="modal-logo-wrapper">
+                        <img src="../images/image-removebg-preview (3).png" alt="HomeEquity" class="modal-logo-img">
+                    </div>
+                    <!-- Slogan under logo -->
+                    <div class="modal-slogan">Find Your Perfect Match</div>
                 </div>
-                <!-- Trust Bar: 3 Credibility Indicators -->
-                <div class="modal-trust-bar">
-                    <div class="modal-trust-item">
-                        <svg class="modal-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
-                        <span>Trusted by 50,000+</span>
-                    </div>
-                    <span class="modal-trust-sep">|</span>
-                    <div class="modal-trust-item">
-                        <svg class="modal-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            <polyline points="9 12 11 14 15 10"/>
-                        </svg>
-                        <span>Secure & Private</span>
-                    </div>
-                    <span class="modal-trust-sep">|</span>
-                    <div class="modal-trust-item">
-                        <svg class="modal-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 21h18"/>
-                            <path d="M5 21V7l8-4 8 4v14"/>
-                            <path d="M9 21v-6h6v6"/>
-                        </svg>
-                        <span>Top US Lenders</span>
+
+                <!-- ZONE 2: Trust Bar (White Background) -->
+                <div class="trust-zone">
+                    <div class="modal-trust-bar">
+                        <div class="modal-trust-item">
+                            <svg class="modal-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            <span class="trust-text-full">50,000+ Users</span>
+                            <span class="trust-text-short">50k+</span>
+                        </div>
+                        <span class="modal-trust-sep">•</span>
+                        <div class="modal-trust-item">
+                            <svg class="modal-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <polyline points="9 12 11 14 15 10"/>
+                            </svg>
+                            <span>Secure</span>
+                        </div>
+                        <span class="modal-trust-sep">•</span>
+                        <div class="modal-trust-item">
+                            <svg class="modal-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 21h18"/>
+                                <path d="M5 21V7l8-4 8 4v14"/>
+                                <path d="M9 21v-6h6v6"/>
+                            </svg>
+                            <span>Top Lenders</span>
+                        </div>
                     </div>
                 </div>
-                <!-- Progress Row -->
+
+                <!-- ZONE 3: Progress Row -->
                 <div class="modal-progress-row">
                     <button class="quiz-back-btn-header" id="quizBackBtn">← Back</button>
                     <div class="modal-progress">
                         <div class="modal-progress-bar">
                             <div class="modal-progress-fill" id="modalProgressFill"></div>
                         </div>
-                        <span class="modal-progress-percent" id="modalProgressPercent">0%</span>
+                        <span class="modal-progress-label" id="modalProgressLabel">Step 1 of 5</span>
                     </div>
+                </div>
+            </div>
+
+            <!-- Disclosure Modal Overlay -->
+            <div class="disclosure-modal-overlay" id="disclosureModalOverlay">
+                <div class="disclosure-modal">
+                    <button class="disclosure-modal-close" id="closeDisclosureModal">&times;</button>
+                    <h3>Advertiser Disclosure</h3>
+                    <p>TheFinanceGuide.org is supported by referral fees from the sites featured. The sites and advertisements that we present are from companies from which TheFinanceGuide.org receives compensation.</p>
+                    <p>TheFinanceGuide.org cannot and does not present information about every site or offer available.</p>
                 </div>
             </div>
 
@@ -537,14 +561,26 @@ var ctx = confettiCanvas.getContext('2d');
 
 // ===== Progress Map =====
 var progressMap = {
-    1: 0,
-    2: 12,
-    3: 25,
-    4: 40,
-    5: 55,
-    6: 70,
-    7: 85,
+    1: 5,
+    2: 20,
+    3: 35,
+    4: 50,
+    5: 65,
+    6: 80,
+    7: 90,
     8: 100
+};
+
+// ===== Step Label Map (for "Step X of 5" display) =====
+var stepLabelMap = {
+    1: 'Step 1 of 5',
+    2: 'Searching...',
+    3: 'Found!',
+    4: 'Step 2 of 5',
+    5: 'Step 3 of 5',
+    6: 'Step 4 of 5',
+    7: 'Finalizing...',
+    8: 'Step 5 of 5'
 };
 
 // ===== Confetti System =====
@@ -680,9 +716,13 @@ function showQuizStep(stepNum) {
     }
     document.getElementById('quizStep' + stepNum).classList.add('active');
     currentStep = stepNum;
-    var percent = progressMap[stepNum] || 0;
+    var percent = progressMap[stepNum] || 5;
     progressFill.style.width = percent + '%';
-    document.getElementById('modalProgressPercent').textContent = percent + '%';
+    // Update step label
+    var labelEl = document.getElementById('modalProgressLabel');
+    if (labelEl) {
+        labelEl.textContent = stepLabelMap[stepNum] || ('Step ' + stepNum);
+    }
 }
 
 function calculateCash() {
@@ -1040,6 +1080,25 @@ showQuizStep = function(stepNum) {
 
 // ===== Show first step =====
 showQuizStep(1);
+
+// ===== Disclosure Modal =====
+var disclosureOverlay = document.getElementById('disclosureModalOverlay');
+var openDisclosureBtn = document.getElementById('openDisclosureModal');
+var closeDisclosureBtn = document.getElementById('closeDisclosureModal');
+
+openDisclosureBtn.addEventListener('click', function() {
+    disclosureOverlay.classList.add('active');
+});
+
+closeDisclosureBtn.addEventListener('click', function() {
+    disclosureOverlay.classList.remove('active');
+});
+
+disclosureOverlay.addEventListener('click', function(e) {
+    if (e.target === disclosureOverlay) {
+        disclosureOverlay.classList.remove('active');
+    }
+});
     </script>
 </body>
 </html>

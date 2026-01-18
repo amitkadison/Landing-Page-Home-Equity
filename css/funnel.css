@@ -1530,60 +1530,205 @@ body {
     }
 }
 
-/* Modal Header - Trust Header Design */
+/* ========================================
+   SPLIT HEADER - Two-Tone Design
+======================================== */
+
+/* Modal Header Container */
 .modal-header {
-    padding: 16px 20px 12px;
-    border-bottom: 1px solid var(--gray-200);
-    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
     border-radius: var(--ios-radius) var(--ios-radius) 0 0;
     z-index: 10;
     flex-shrink: 0;
+    overflow: hidden;
+}
+
+/* ZONE 1: Brand Header - Colored Background */
+.brand-header-zone {
+    background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%);
+    padding: 20px 20px 16px;
+    position: relative;
+    text-align: center;
+    border-bottom: 1px solid #E2E8F0;
+}
+
+/* Advertising Disclosure - Top Right Corner */
+.header-ad-disclosure {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+}
+
+.header-disclosure-link {
+    font-size: 10px;
+    color: #9CA3AF;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s ease;
+    letter-spacing: 0.2px;
+}
+
+.header-disclosure-link:hover {
+    color: #6B7280;
 }
 
 /* Centered Logo */
 .modal-logo-wrapper {
     display: flex;
+    align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .modal-logo-img {
-    max-height: 38px;
+    max-height: 48px;
     width: auto;
     display: block;
 }
 
-/* Trust Bar - 3 Credibility Indicators */
+/* Slogan - Centered under logo */
+.modal-slogan {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--trust-navy);
+    letter-spacing: 0.3px;
+    text-align: center;
+    line-height: 1.3;
+}
+
+/* ZONE 2: Trust Zone - White Background with Shadow */
+.trust-zone {
+    background: #FFFFFF;
+    padding: 14px 16px 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Trust Bar */
 .modal-trust-bar {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
+    gap: 14px;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
 }
 
 .modal-trust-item {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
     font-size: 11px;
     font-weight: 500;
-    color: #4A5568;
+    color: #64748B;
     white-space: nowrap;
 }
 
 .modal-trust-icon {
-    width: 14px;
-    height: 14px;
-    stroke: #4A5568;
+    width: 13px;
+    height: 13px;
+    stroke: #64748B;
     flex-shrink: 0;
 }
 
 .modal-trust-sep {
     color: #CBD5E0;
-    font-size: 12px;
+    font-size: 8px;
     font-weight: 300;
+    flex-shrink: 0;
+}
+
+/* Mobile-only shortened text */
+.trust-text-short {
+    display: none;
+}
+
+.trust-text-full {
+    display: inline;
+}
+
+/* ========================================
+   DISCLOSURE MODAL OVERLAY
+======================================== */
+.disclosure-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    border-radius: var(--ios-radius);
+}
+
+.disclosure-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.disclosure-modal {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 90%;
+    width: 340px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: disclosureSlideIn 0.2s ease;
+}
+
+@keyframes disclosureSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.disclosure-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #9CA3AF;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px;
+    transition: color 0.2s ease;
+}
+
+.disclosure-modal-close:hover {
+    color: #4B5563;
+}
+
+.disclosure-modal h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--trust-navy);
+    margin-bottom: 12px;
+    padding-right: 24px;
+}
+
+.disclosure-modal p {
+    font-size: 13px;
+    color: #4B5563;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.disclosure-modal p:last-child {
+    margin-bottom: 0;
 }
 
 /* Progress Row with Back Button */
@@ -1591,6 +1736,9 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
+    padding: 12px 16px;
+    background: #FFFFFF;
+    border-top: 1px solid #F1F5F9;
 }
 
 .quiz-back-btn-header {
@@ -1600,10 +1748,10 @@ body {
     background: none;
     border: none;
     color: var(--text-gray);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    padding: 6px 10px;
+    padding: 8px 12px;
     border-radius: 6px;
     transition: all 0.2s ease;
     white-space: nowrap;
@@ -1619,26 +1767,38 @@ body {
 .modal-progress {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     flex: 1;
 }
 
+/* Thicker Progress Bar with Darker Track */
 .modal-progress-bar {
     flex: 1;
-    height: 6px;
-    background: var(--gray-200);
-    border-radius: 3px;
+    height: 10px;
+    background: #E2E8F0;
+    border-radius: 5px;
     overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 .modal-progress-fill {
     height: 100%;
-    background: var(--bank-green);
-    border-radius: 3px;
-    width: 0%;
+    background: linear-gradient(90deg, var(--bank-green) 0%, #00806A 100%);
+    border-radius: 5px;
+    width: 5%;
+    min-width: 5%;
     transition: width 0.4s ease;
 }
 
+/* Step Label instead of Percent */
+.modal-progress-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748B;
+    white-space: nowrap;
+}
+
+/* Legacy percent support */
 .modal-progress-percent {
     font-size: 13px;
     font-weight: 700;
@@ -1725,16 +1885,17 @@ body {
 
 #zipInput {
     width: 100%;
-    padding: 18px 20px 18px 52px;
-    /* CRITICAL: 16px minimum prevents iOS auto-zoom */
-    font-size: 20px;
+    height: 60px;
+    padding: 16px 20px 16px 54px;
+    /* CRITICAL: 16px minimum prevents iOS auto-zoom - using 22px for senior-friendly */
+    font-size: 22px;
     font-weight: 600;
-    background: var(--gray-50);
-    border: 2px solid var(--gray-200);
-    border-radius: var(--ios-radius-sm);
+    background: #FFFFFF;
+    border: 2px solid #CBD5E0;
+    border-radius: 12px;
     color: var(--primary);
     text-align: center;
-    letter-spacing: 6px;
+    letter-spacing: 8px;
     outline: none;
     transition: all 0.2s;
     -webkit-appearance: none;
@@ -2429,6 +2590,66 @@ body {
    RESPONSIVE
 ======================================== */
 @media (max-width: 600px) {
+    /* Brand Header Zone - Mobile */
+    .brand-header-zone {
+        padding: 16px 16px 12px;
+    }
+
+    .header-ad-disclosure {
+        top: 6px;
+        right: 10px;
+    }
+
+    .header-disclosure-link {
+        font-size: 9px;
+    }
+
+    .modal-logo-img {
+        max-height: 40px;
+    }
+
+    .modal-logo-wrapper {
+        margin-bottom: 6px;
+    }
+
+    .modal-slogan {
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    /* Trust Zone - Mobile */
+    .trust-zone {
+        padding: 10px 12px 8px;
+    }
+
+    .trust-text-full {
+        display: none;
+    }
+
+    .trust-text-short {
+        display: inline;
+    }
+
+    .modal-trust-bar {
+        gap: 10px;
+    }
+
+    .modal-trust-item {
+        font-size: 10px;
+        gap: 3px;
+        color: #64748B;
+    }
+
+    .modal-trust-icon {
+        width: 11px;
+        height: 11px;
+        stroke: #64748B;
+    }
+
+    .modal-trust-sep {
+        font-size: 7px;
+    }
+
     .result-hero {
         padding: 32px 16px 28px;
     }
@@ -2745,5 +2966,79 @@ body {
 
     .celebration-amount {
         font-size: 32px;
+    }
+}
+
+/* ========================================
+   ADVERTISING DISCLOSURE
+======================================== */
+.ad-disclosure {
+    margin-top: 16px;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.ad-disclosure-link {
+    font-size: 11px;
+    color: #CBD5E0;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s ease;
+}
+
+.ad-disclosure-link:hover,
+.ad-disclosure-link:focus {
+    color: #A0AEC0;
+    outline: none;
+}
+
+.ad-disclosure-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1A202C;
+    color: #FFFFFF;
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 10px 14px;
+    border-radius: 8px;
+    width: max-content;
+    max-width: 280px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 100;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: left;
+}
+
+.ad-disclosure-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #1A202C;
+}
+
+.ad-disclosure-link:hover + .ad-disclosure-tooltip,
+.ad-disclosure-link:focus + .ad-disclosure-tooltip,
+.ad-disclosure:hover .ad-disclosure-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mobile tooltip adjustments */
+@media (max-width: 600px) {
+    .ad-disclosure-tooltip {
+        max-width: 240px;
+        font-size: 11px;
+        padding: 8px 12px;
     }
 }
