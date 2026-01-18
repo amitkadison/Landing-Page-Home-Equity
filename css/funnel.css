@@ -175,68 +175,69 @@ body {
     user-select: none;
 }
 
-/* ===== Header - iOS Dark Style ===== */
+/* ===== Header - Vertical Stack with Trust Bar ===== */
 .result-header {
-    background: var(--header-bg);
-    padding: 16px 24px;
+    background: var(--ios-card-bg);
+    padding: 16px 24px 14px;
     position: sticky;
     top: 0;
     z-index: 10;
+    border-bottom: 1px solid var(--ios-separator);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
 }
 
 .header-container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    gap: 12px;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
 }
 
-.logo-icon {
-    font-size: 26px;
+.site-logo {
+    max-height: 52px;
+    width: auto;
+    display: block;
 }
 
-.logo-text {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--white);
-    letter-spacing: -0.3px;
-}
-
-.header-nav {
+/* Trust Bar / Credibility Strip */
+.header-trust-bar {
     display: flex;
-    gap: 24px;
-    font-size: 14px;
-    color: rgba(255,255,255,0.7);
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
-.header-nav span {
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-.header-nav span:hover {
-    color: var(--white);
-}
-
-.header-trust-badge {
+.trust-item {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 12px;
-    color: var(--success-green);
-    background: rgba(0, 200, 83, 0.1);
-    padding: 6px 12px;
-    border-radius: 20px;
-    border: 1px solid rgba(0, 200, 83, 0.3);
+    font-size: 13px;
+    font-weight: 500;
+    color: #4A5568;
+    white-space: nowrap;
+}
+
+.trust-icon {
+    width: 16px;
+    height: 16px;
+    stroke: #4A5568;
+    flex-shrink: 0;
+}
+
+.trust-separator {
+    color: #CBD5E0;
+    font-size: 14px;
+    font-weight: 300;
 }
 
 /* ===== Main Container - 2 Column Layout ===== */
@@ -961,7 +962,32 @@ body {
 }
 
 @media (max-width: 600px) {
-    .header-nav {
+    /* Header mobile */
+    .header-container {
+        gap: 10px;
+    }
+
+    .site-logo {
+        max-height: 44px;
+    }
+
+    /* Trust Bar Mobile - Stack gracefully */
+    .header-trust-bar {
+        gap: 8px 12px;
+        justify-content: center;
+    }
+
+    .trust-item {
+        font-size: 11px;
+        gap: 4px;
+    }
+
+    .trust-icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .trust-separator {
         display: none;
     }
 

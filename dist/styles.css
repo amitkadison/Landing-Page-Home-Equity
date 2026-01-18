@@ -175,10 +175,10 @@ body {
     user-select: none;
 }
 
-/* ===== Header - Clean iOS Style ===== */
+/* ===== Header - Vertical Stack with Trust Bar ===== */
 .result-header {
     background: var(--ios-card-bg);
-    padding: 16px 24px;
+    padding: 16px 24px 14px;
     position: sticky;
     top: 0;
     z-index: 10;
@@ -191,44 +191,53 @@ body {
     max-width: 1100px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    flex-shrink: 0;
+    justify-content: center;
 }
 
 .site-logo {
-    max-height: 56px;
+    max-height: 52px;
     width: auto;
     display: block;
 }
 
-.header-tagline {
-    font-size: 14px;
-    color: var(--trust-navy);
-    font-weight: 500;
-    line-height: 1;
-    text-align: right;
-    margin: 0;
-    white-space: nowrap;
-    letter-spacing: -0.2px;
+/* Trust Bar / Credibility Strip */
+.header-trust-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
-.header-trust-badge {
+.trust-item {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 12px;
-    color: var(--success-green);
-    background: rgba(0, 200, 83, 0.1);
-    padding: 6px 12px;
-    border-radius: 20px;
-    border: 1px solid rgba(0, 200, 83, 0.3);
+    font-size: 13px;
+    font-weight: 500;
+    color: #4A5568;
+    white-space: nowrap;
+}
+
+.trust-icon {
+    width: 16px;
+    height: 16px;
+    stroke: #4A5568;
+    flex-shrink: 0;
+}
+
+.trust-separator {
+    color: #CBD5E0;
+    font-size: 14px;
+    font-weight: 300;
 }
 
 /* ===== Main Container - 2 Column Layout ===== */
@@ -1069,19 +1078,31 @@ body {
 @media (max-width: 600px) {
     /* Header mobile */
     .header-container {
-        flex-direction: column;
         gap: 10px;
-        text-align: center;
-    }
-
-    .header-tagline {
-        text-align: center;
-        font-size: 12px;
-        white-space: normal;
     }
 
     .site-logo {
         max-height: 44px;
+    }
+
+    /* Trust Bar Mobile - Stack gracefully */
+    .header-trust-bar {
+        gap: 8px 12px;
+        justify-content: center;
+    }
+
+    .trust-item {
+        font-size: 11px;
+        gap: 4px;
+    }
+
+    .trust-icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .trust-separator {
+        display: none;
     }
 
     /* Benefit Bar - Single line, NO scroll */
