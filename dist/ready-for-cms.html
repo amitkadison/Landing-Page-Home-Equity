@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Home Equity - Your Matched Offers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+/* ===== Variables ===== */
+:root {
+    --primary: #1a365d;
+    --primary-light: #2d4a6f;
+    --gold: #d4af37;
+    --gold-light: #f4e4bc;
+    --gold-dark: #b8962e;
+    --green: #22c55e;
+    --green-dark: #16a34a;
+    --white: #ffffff;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-400: #94a3b8;
+    --gray-500: #64748b;
+    --gray-600: #475569;
+    --gray-700: #334155;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+}
+
+/* ===== Reset ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--gray-50);
+    color: var(--primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ========================================
+   RESULT PAGE (Background)
+======================================== */
+.result-page {
+    min-height: 100vh;
+    background: var(--gray-50);
+    transition: filter 0.5s ease;
+}
+
+.result-page.blurred {
+    filter: blur(8px);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Result Header */
+.result-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 16px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.result-header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-icon { font-size: 24px; }
+.logo-text { font-size: 18px; font-weight: 700; color: var(--primary); }
+
+.header-trust {
+    font-size: 13px;
+    color: var(--gray-500);
+}
+
+/* Result Hero */
+.result-hero {
+    text-align: center;
+    padding: 40px 20px 30px;
+    background: var(--white);
+}
+
+.result-hero h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.result-hero p {
+    font-size: 16px;
+    color: var(--gray-500);
+}
+
+.result-hero strong {
+    color: var(--green);
+}
+
+/* Lender Cards Container */
+.lender-cards {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Single Lender Card */
+.lender-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--gray-200);
+}
+
+.lender-card.featured {
+    border: 2px solid var(--gold);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 16px;
+    text-align: center;
+}
+
+.lender-card.featured .card-header {
+    padding-top: 50px;
+}
+
+.card-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.lender-logo {
+    flex: 1;
+    min-width: 120px;
+}
+
+.logo-placeholder {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.lender-rating {
+    text-align: right;
+}
+
+.rating-source {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+}
+
+.rating-stars {
+    color: var(--green);
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.rating-score {
+    font-size: 13px;
+    color: var(--gray-600);
+    margin-top: 2px;
+}
+
+.rating-score span {
+    color: var(--gray-400);
+}
+
+.card-body {
+    padding: 0 20px 20px;
+}
+
+.lender-benefits {
+    list-style: none;
+}
+
+.lender-benefits li {
+    font-size: 14px;
+    color: var(--gray-600);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.lender-benefits li:last-child {
+    border-bottom: none;
+}
+
+.card-footer {
+    padding: 0 20px 20px;
+}
+
+.cta-btn {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    background: var(--green);
+    border: none;
+    border-radius: 10px;
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cta-btn:hover {
+    background: var(--green-dark);
+}
+
+/* Result Footer */
+.result-footer {
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 12px;
+    color: var(--gray-400);
+}
+
+/* ========================================
+   BLUR OVERLAY
+======================================== */
+.blur-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 100;
+    transition: opacity 0.5s ease;
+}
+
+.blur-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ========================================
+   QUIZ MODAL
+======================================== */
+.quiz-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    padding: 20px;
+    transition: opacity 0.5s ease;
+}
+
+.quiz-modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-container {
+    background: var(--white);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Modal Header */
+.modal-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--gray-100);
+    position: sticky;
+    top: 0;
+    background: var(--white);
+    border-radius: 20px 20px 0 0;
+    z-index: 10;
+}
+
+.modal-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+
+.modal-progress-bar {
+    height: 4px;
+    background: var(--gray-200);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.modal-progress-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.4s ease;
+}
+
+/* Quiz Content */
+.quiz-content {
+    padding: 24px 20px 30px;
+}
+
+.quiz-step {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.quiz-step.active {
+    display: block;
+}
+
+.quiz-step h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.quiz-step > p {
+    font-size: 14px;
+    color: var(--gray-500);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+/* Zip Input */
+.zip-input-wrapper {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.zip-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+#zipInput {
+    width: 100%;
+    padding: 16px 20px 16px 48px;
+    font-size: 20px;
+    font-weight: 600;
+    background: var(--gray-50);
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    color: var(--primary);
+    text-align: center;
+    letter-spacing: 4px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+#zipInput:focus {
+    border-color: var(--gold);
+    background: var(--white);
+}
+
+#zipInput::placeholder {
+    letter-spacing: 1px;
+    color: var(--gray-400);
+}
+
+/* Quiz Button */
+.quiz-btn {
+    width: 100%;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    background: var(--gold);
+    border: none;
+    border-radius: 12px;
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.quiz-btn:active {
+    transform: scale(0.98);
+}
+
+.quiz-btn.disabled {
+    background: var(--gray-200);
+    color: var(--gray-400);
+    cursor: not-allowed;
+}
+
+/* Searching Animation */
+.searching-animation {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.search-radar {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+}
+
+.radar-ping {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    animation: ping 1.5s ease-out infinite;
+}
+
+.search-steps {
+    max-width: 260px;
+    margin: 24px auto 0;
+    text-align: left;
+}
+
+.s-step {
+    padding: 12px 0;
+    font-size: 14px;
+    color: var(--gray-400);
+    border-bottom: 1px solid var(--gray-100);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+}
+
+.s-step.active { color: var(--primary); }
+.s-step.complete { color: var(--green); }
+
+/* Found Results */
+.found-results {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.found-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    animation: bounce 0.5s ease;
+}
+
+.found-box {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: 16px;
+    padding: 24px;
+    margin: 20px 0;
+}
+
+.found-number {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--gold);
+}
+
+.found-text {
+    font-size: 14px;
+    color: var(--gold-light);
+}
+
+.found-results > p {
+    color: var(--gray-500);
+    margin-bottom: 20px;
+}
+
+/* Quiz Options */
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quiz-option {
+    width: 100%;
+    padding: 16px 20px;
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+}
+
+.quiz-option:active {
+    transform: scale(0.98);
+}
+
+.quiz-option.selected {
+    border-color: var(--gold);
+    background: var(--gold-light);
+}
+
+.quiz-option.has-badge {
+    padding-top: 22px;
+}
+
+.option-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.credit-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+/* Cash Box */
+.cash-box {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cash-label {
+    font-size: 14px;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+}
+
+.cash-value {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--gold);
+}
+
+/* Goals Grid */
+.quiz-goals {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.goal-option {
+    padding: 20px 12px;
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.goal-option:active {
+    transform: scale(0.98);
+}
+
+.goal-option.selected {
+    border-color: var(--gold);
+    background: var(--gold-light);
+}
+
+.goal-option span:first-child {
+    font-size: 28px;
+}
+
+/* Final Loading */
+.final-load {
+    text-align: center;
+    padding: 30px 0;
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--gray-200);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spin 0.8s linear infinite;
+}
+
+.final-steps {
+    margin-top: 24px;
+}
+
+.f-step {
+    font-size: 14px;
+    color: var(--gray-400);
+    padding: 6px 0;
+    transition: all 0.3s;
+}
+
+.f-step.active {
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.f-step.complete {
+    color: var(--green);
+}
+
+/* ========================================
+   CELEBRATION / CONFETTI
+======================================== */
+#confettiCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.celebration {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.celebration-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    animation: celebrateBounce 0.6s ease;
+}
+
+.celebration h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.celebration-text {
+    font-size: 15px;
+    color: var(--gray-500);
+    margin-bottom: 20px;
+}
+
+.celebration-amount {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--gold);
+    text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+    animation: amountPop 0.5s ease 0.3s both;
+}
+
+.celebration-sub {
+    font-size: 14px;
+    color: var(--gray-500);
+    margin-bottom: 24px;
+}
+
+.celebration-btn {
+    animation: btnPulse 2s ease-in-out infinite;
+}
+
+@keyframes celebrateBounce {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes amountPop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes btnPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
+    50% { transform: scale(1.02); box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5); }
+}
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ping {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+@media (max-width: 600px) {
+    .result-hero h1 {
+        font-size: 24px;
+    }
+
+    .card-header {
+        flex-direction: column;
+    }
+
+    .lender-rating {
+        text-align: left;
+    }
+
+    .quiz-step h2 {
+        font-size: 20px;
+    }
+
+    .cash-value {
+        font-size: 34px;
+    }
+
+    .found-number {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 380px) {
+    .modal-container {
+        border-radius: 16px;
+    }
+
+    .quiz-content {
+        padding: 20px 16px;
+    }
+
+    #zipInput {
+        font-size: 18px;
+        padding: 14px 16px 14px 44px;
+    }
+
+    .quiz-option {
+        padding: 14px 16px;
+        font-size: 14px;
+    }
+
+    .goal-option {
+        padding: 16px 10px;
+    }
+
+    .goal-option span:first-child {
+        font-size: 24px;
+    }
+}
+
+/* Safe Area for iPhone X+ */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .quiz-modal {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- ========== RESULT PAGE (Background - Blurred Initially) ========== -->
+    <div class="result-page" id="resultPage">
+        <!-- Header -->
+        <header class="result-header">
+            <div class="result-header-inner">
+                <div class="logo">
+                    <span class="logo-icon">🏠</span>
+                    <span class="logo-text">HomeEquity</span>
+                </div>
+                <div class="header-trust">
+                    <span>🔒 Secure & Free</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="result-hero">
+            <h1>We Found Your Perfect Match!</h1>
+            <p>Compare low rates from top lenders that match your criteria - it's <strong>FREE</strong>.</p>
+        </section>
+
+        <!-- Lender Cards -->
+        <section class="lender-cards">
+            <!-- Card 1: Quicken Loans (Featured) -->
+            <div class="lender-card featured">
+                <div class="card-badge">🏆 Best Value For Your Need</div>
+                <div class="card-header">
+                    <div class="lender-logo quicken">
+                        <span class="logo-placeholder">Quicken Loans</span>
+                    </div>
+                    <div class="lender-rating">
+                        <div class="rating-source">TRUSTPILOT</div>
+                        <div class="rating-stars">★★★★★</div>
+                        <div class="rating-score">4.3 out of 5 <span>(20,263 reviews)</span></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="lender-benefits">
+                        <li>✓ Pay nothing upfront and get lender recommendations tailored to your needs</li>
+                        <li>✓ Industry-leading home equity solutions</li>
+                        <li>✓ 100% online, fully secure experience</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <button class="cta-btn">View Offer →</button>
+                </div>
+            </div>
+
+            <!-- Card 2: Unlock -->
+            <div class="lender-card">
+                <div class="card-header">
+                    <div class="lender-logo unlock">
+                        <span class="logo-placeholder">Unlock</span>
+                    </div>
+                    <div class="lender-rating">
+                        <div class="rating-source">TRUSTPILOT</div>
+                        <div class="rating-stars">★★★★★</div>
+                        <div class="rating-score">4.7 out of 5 <span>(1,530 reviews)</span></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="lender-benefits">
+                        <li>✓ Access up to $500,000 in home equity with NO monthly payments</li>
+                        <li>✓ No age or income requirements</li>
+                        <li>✓ Minimum 500 Credit Score</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <button class="cta-btn">View Offer →</button>
+                </div>
+            </div>
+
+            <!-- Card 3: Hometap -->
+            <div class="lender-card">
+                <div class="card-header">
+                    <div class="lender-logo hometap">
+                        <span class="logo-placeholder">Hometap</span>
+                    </div>
+                    <div class="lender-rating">
+                        <div class="rating-source">TRUSTPILOT</div>
+                        <div class="rating-stars">★★★★★</div>
+                        <div class="rating-score">4.8 out of 5 <span>(719 reviews)</span></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="lender-benefits">
+                        <li>✓ Access up to $600k from your home's value with no monthly payments</li>
+                        <li>✓ Stay in the home you love while funding goals</li>
+                        <li>✓ No impact on DTI or credit profile during term</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <button class="cta-btn">View Offer →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="result-footer">
+            <p>© 2025 HomeEquity. All rights reserved. NMLS Licensed.</p>
+        </footer>
+    </div>
+
+    <!-- ========== CONFETTI CANVAS ========== -->
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- ========== BLUR OVERLAY ========== -->
+    <div class="blur-overlay" id="blurOverlay"></div>
+
+    <!-- ========== QUIZ MODAL (Pop-up) ========== -->
+    <div class="quiz-modal" id="quizModal">
+        <div class="modal-container">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div class="modal-logo">
+                    <span>🏠</span>
+                    <span>HomeEquity</span>
+                </div>
+                <div class="modal-progress">
+                    <div class="modal-progress-bar">
+                        <div class="modal-progress-fill" id="modalProgressFill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Steps Container -->
+            <div class="quiz-content">
+                <!-- Step 1: Zip Code -->
+                <div class="quiz-step active" id="quizStep1">
+                    <h2>See how much cash you could unlock</h2>
+                    <p>Enter your zip code to find lenders in your area</p>
+                    <div class="zip-input-wrapper">
+                        <span class="zip-icon">📍</span>
+                        <input type="text" id="zipInput" inputmode="numeric" placeholder="Zip Code" maxlength="5">
+                    </div>
+                    <button class="quiz-btn disabled" id="zipSubmitBtn" disabled>
+                        Find Lenders Near Me →
+                    </button>
+                </div>
+
+                <!-- Step 2: Searching -->
+                <div class="quiz-step" id="quizStep2">
+                    <div class="searching-animation">
+                        <div class="search-radar">
+                            <div class="radar-ping"></div>
+                            <span>📍</span>
+                        </div>
+                        <h2>Searching in <span id="zipDisplay">00000</span>...</h2>
+                        <div class="search-steps">
+                            <div class="s-step" id="sStep1"><span>⏳</span> Finding local lenders...</div>
+                            <div class="s-step" id="sStep2"><span>⏳</span> Checking available offers...</div>
+                            <div class="s-step" id="sStep3"><span>⏳</span> Analyzing best rates...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Results Found -->
+                <div class="quiz-step" id="quizStep3">
+                    <div class="found-results">
+                        <div class="found-icon">🎉</div>
+                        <h2>Great News!</h2>
+                        <div class="found-box">
+                            <div class="found-number">10</div>
+                            <div class="found-text">offers found in your area</div>
+                        </div>
+                        <p>Let's find the best match for you</p>
+                        <button class="quiz-btn" id="continueBtn">Continue →</button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Property Value -->
+                <div class="quiz-step" id="quizStep4">
+                    <h2>What's your home worth?</h2>
+                    <p>Estimated property value</p>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-value="800000">Over $750,000</button>
+                        <button class="quiz-option" data-value="600000">$450,000 - $750,000</button>
+                        <button class="quiz-option" data-value="350000">$250,000 - $450,000</button>
+                        <button class="quiz-option" data-value="175000">Under $250,000</button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Mortgage Balance -->
+                <div class="quiz-step" id="quizStep5">
+                    <h2>Current mortgage balance?</h2>
+                    <p>This helps us calculate your equity</p>
+                    <div class="quiz-options">
+                        <button class="quiz-option has-badge" data-value="0">
+                            <span class="option-badge">Best Rates!</span>
+                            Paid Off
+                        </button>
+                        <button class="quiz-option" data-value="200000">Under $320,000</button>
+                        <button class="quiz-option" data-value="460000">$320,000 - $600,000</button>
+                        <button class="quiz-option" data-value="700000">Over $600,000</button>
+                    </div>
+                </div>
+
+                <!-- Step 6: Cash + Goal -->
+                <div class="quiz-step" id="quizStep6">
+                    <div class="cash-box">
+                        <div class="cash-label">You could unlock up to</div>
+                        <div class="cash-value" id="cashValue">$0</div>
+                    </div>
+                    <p>What do you want to use it for?</p>
+                    <div class="quiz-goals">
+                        <button class="goal-option" data-id="home">
+                            <span>🛠️</span>
+                            <span>Home Upgrade</span>
+                        </button>
+                        <button class="goal-option" data-id="debt">
+                            <span>💳</span>
+                            <span>Pay Off Debt</span>
+                        </button>
+                        <button class="goal-option" data-id="cash">
+                            <span>💰</span>
+                            <span>Get Cash</span>
+                        </button>
+                        <button class="goal-option" data-id="other">
+                            <span>✨</span>
+                            <span>Other</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 7: Credit Score -->
+                <div class="quiz-step" id="quizStep7">
+                    <h2>Estimate your credit score</h2>
+                    <p>No impact to your credit</p>
+                    <div class="quiz-options">
+                        <button class="quiz-option credit-opt" data-id="excellent">
+                            <span class="credit-dot" style="background:#166534"></span>
+                            Excellent (720+)
+                        </button>
+                        <button class="quiz-option credit-opt" data-id="good">
+                            <span class="credit-dot" style="background:#22c55e"></span>
+                            Good (660-719)
+                        </button>
+                        <button class="quiz-option credit-opt" data-id="average">
+                            <span class="credit-dot" style="background:#eab308"></span>
+                            Average (600-659)
+                        </button>
+                        <button class="quiz-option credit-opt" data-id="rebuilding">
+                            <span class="credit-dot" style="background:#f97316"></span>
+                            Rebuilding (&lt;600)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 8: Final Loading -->
+                <div class="quiz-step" id="quizStep8">
+                    <div class="final-load">
+                        <div class="spinner"></div>
+                        <h2>Unlocking your offers...</h2>
+                        <div class="final-steps">
+                            <div class="f-step active" id="fStep1">Matching with lenders...</div>
+                            <div class="f-step" id="fStep2">Calculating rates...</div>
+                            <div class="f-step" id="fStep3">Preparing your offers...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 9: Confetti Celebration -->
+                <div class="quiz-step" id="quizStep9">
+                    <div class="celebration">
+                        <div class="celebration-icon">🎉</div>
+                        <h2>Congratulations!</h2>
+                        <p class="celebration-text">Your personalized offers are ready</p>
+                        <div class="celebration-amount" id="celebrationAmount">$0</div>
+                        <p class="celebration-sub">in potential equity</p>
+                        <button class="quiz-btn celebration-btn" id="viewOffersBtn">
+                            View My Offers →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+// ===== State =====
+let answers = {
+    zipCode: '',
+    propertyValue: null,
+    mortgageBalance: null,
+    goal: null,
+    credit: null
+};
+let calculatedCash = 0;
+let currentStep = 1;
+
+// ===== DOM Elements =====
+const resultPage = document.getElementById('resultPage');
+const blurOverlay = document.getElementById('blurOverlay');
+const quizModal = document.getElementById('quizModal');
+const progressFill = document.getElementById('modalProgressFill');
+const zipInput = document.getElementById('zipInput');
+const zipSubmitBtn = document.getElementById('zipSubmitBtn');
+const confettiCanvas = document.getElementById('confettiCanvas');
+const ctx = confettiCanvas.getContext('2d');
+
+// ===== Progress Map =====
+const progressMap = {
+    1: 0,
+    2: 12,
+    3: 25,
+    4: 37,
+    5: 50,
+    6: 62,
+    7: 75,
+    8: 87,
+    9: 100
+};
+
+// ===== Confetti System =====
+let confettiParticles = [];
+let confettiAnimationId = null;
+
+function resizeCanvas() {
+    confettiCanvas.width = window.innerWidth;
+    confettiCanvas.height = window.innerHeight;
+}
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+class ConfettiParticle {
+    constructor() {
+        this.x = Math.random() * confettiCanvas.width;
+        this.y = -20;
+        this.size = Math.random() * 10 + 5;
+        this.speedY = Math.random() * 3 + 2;
+        this.speedX = Math.random() * 4 - 2;
+        this.rotation = Math.random() * 360;
+        this.rotationSpeed = Math.random() * 10 - 5;
+        this.color = this.getRandomColor();
+        this.shape = Math.random() > 0.5 ? 'rect' : 'circle';
+        this.opacity = 1;
+    }
+
+    getRandomColor() {
+        const colors = [
+            '#d4af37', // Gold
+            '#f4e4bc', // Light Gold
+            '#22c55e', // Green
+            '#3b82f6', // Blue
+            '#ef4444', // Red
+            '#a855f7', // Purple
+            '#ec4899', // Pink
+            '#f97316', // Orange
+        ];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        this.rotation += this.rotationSpeed;
+        this.speedY += 0.1; // gravity
+
+        if (this.y > confettiCanvas.height - 100) {
+            this.opacity -= 0.02;
+        }
+    }
+
+    draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.rotation * Math.PI) / 180);
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = this.color;
+
+        if (this.shape === 'rect') {
+            ctx.fillRect(-this.size / 2, -this.size / 4, this.size, this.size / 2);
+        } else {
+            ctx.beginPath();
+            ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        ctx.restore();
+    }
+}
+
+function createConfetti(count = 150) {
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+            confettiParticles.push(new ConfettiParticle());
+        }, i * 10);
+    }
+}
+
+function animateConfetti() {
+    ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+
+    confettiParticles = confettiParticles.filter(p => p.opacity > 0);
+
+    confettiParticles.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
+
+    if (confettiParticles.length > 0) {
+        confettiAnimationId = requestAnimationFrame(animateConfetti);
+    }
+}
+
+function startConfetti() {
+    confettiParticles = [];
+    createConfetti(150);
+    animateConfetti();
+
+    // Second burst after 300ms
+    setTimeout(() => createConfetti(100), 300);
+}
+
+function stopConfetti() {
+    if (confettiAnimationId) {
+        cancelAnimationFrame(confettiAnimationId);
+    }
+    confettiParticles = [];
+    ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+}
+
+// ===== Utility Functions =====
+function formatMoney(num) {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(num);
+}
+
+function showQuizStep(stepNum) {
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    document.getElementById(`quizStep${stepNum}`).classList.add('active');
+    currentStep = stepNum;
+    progressFill.style.width = `${progressMap[stepNum] || 0}%`;
+}
+
+function calculateCash() {
+    if (answers.propertyValue !== null && answers.mortgageBalance !== null) {
+        const equity = answers.propertyValue - answers.mortgageBalance;
+        calculatedCash = Math.max(0, Math.round(equity * 0.8));
+        document.getElementById('cashValue').textContent = formatMoney(calculatedCash);
+        document.getElementById('celebrationAmount').textContent = formatMoney(calculatedCash);
+    }
+}
+
+function unlockResults() {
+    stopConfetti();
+
+    // Hide modal and overlay with animation
+    quizModal.classList.add('hidden');
+    blurOverlay.classList.add('hidden');
+    resultPage.classList.remove('blurred');
+
+    // Scroll to first card
+    setTimeout(() => {
+        document.querySelector('.lender-cards').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }, 600);
+}
+
+// ===== Initialize - Lock the page =====
+resultPage.classList.add('blurred');
+
+// ===== Step 1: Zip Code =====
+zipInput.addEventListener('input', function() {
+    this.value = this.value.replace(/\D/g, '').slice(0, 5);
+    answers.zipCode = this.value;
+
+    if (this.value.length >= 5) {
+        zipSubmitBtn.classList.remove('disabled');
+        zipSubmitBtn.disabled = false;
+    } else {
+        zipSubmitBtn.classList.add('disabled');
+        zipSubmitBtn.disabled = true;
+    }
+});
+
+zipSubmitBtn.addEventListener('click', function() {
+    if (answers.zipCode.length >= 5) {
+        showQuizStep(2);
+        startSearchAnimation();
+    }
+});
+
+// ===== Step 2: Search Animation =====
+function startSearchAnimation() {
+    document.getElementById('zipDisplay').textContent = answers.zipCode;
+
+    const step1 = document.getElementById('sStep1');
+    const step2 = document.getElementById('sStep2');
+    const step3 = document.getElementById('sStep3');
+
+    // Reset
+    [step1, step2, step3].forEach(s => {
+        s.classList.remove('active', 'complete');
+        s.querySelector('span').textContent = '⏳';
+    });
+
+    // Animate steps
+    step1.classList.add('active');
+
+    setTimeout(() => {
+        step1.classList.remove('active');
+        step1.classList.add('complete');
+        step1.querySelector('span').textContent = '✓';
+        step2.classList.add('active');
+    }, 1000);
+
+    setTimeout(() => {
+        step2.classList.remove('active');
+        step2.classList.add('complete');
+        step2.querySelector('span').textContent = '✓';
+        step3.classList.add('active');
+    }, 2000);
+
+    setTimeout(() => {
+        step3.classList.remove('active');
+        step3.classList.add('complete');
+        step3.querySelector('span').textContent = '✓';
+    }, 3000);
+
+    setTimeout(() => {
+        showQuizStep(3);
+    }, 3500);
+}
+
+// ===== Step 3: Continue =====
+document.getElementById('continueBtn').addEventListener('click', function() {
+    showQuizStep(4);
+});
+
+// ===== Step 4: Property Value =====
+document.querySelectorAll('#quizStep4 .quiz-option').forEach(btn => {
+    btn.addEventListener('click', function() {
+        this.classList.add('selected');
+        answers.propertyValue = parseInt(this.dataset.value);
+        setTimeout(() => showQuizStep(5), 400);
+    });
+});
+
+// ===== Step 5: Mortgage Balance =====
+document.querySelectorAll('#quizStep5 .quiz-option').forEach(btn => {
+    btn.addEventListener('click', function() {
+        this.classList.add('selected');
+        answers.mortgageBalance = parseInt(this.dataset.value);
+        calculateCash();
+        setTimeout(() => showQuizStep(6), 400);
+    });
+});
+
+// ===== Step 6: Goals =====
+document.querySelectorAll('#quizStep6 .goal-option').forEach(btn => {
+    btn.addEventListener('click', function() {
+        this.classList.add('selected');
+        answers.goal = this.dataset.id;
+        setTimeout(() => showQuizStep(7), 400);
+    });
+});
+
+// ===== Step 7: Credit Score =====
+document.querySelectorAll('#quizStep7 .quiz-option').forEach(btn => {
+    btn.addEventListener('click', function() {
+        this.classList.add('selected');
+        answers.credit = this.dataset.id;
+        setTimeout(() => {
+            showQuizStep(8);
+            startFinalLoading();
+        }, 400);
+    });
+});
+
+// ===== Step 8: Final Loading =====
+function startFinalLoading() {
+    const step1 = document.getElementById('fStep1');
+    const step2 = document.getElementById('fStep2');
+    const step3 = document.getElementById('fStep3');
+
+    // Reset
+    [step1, step2, step3].forEach(s => s.classList.remove('active', 'complete'));
+    step1.classList.add('active');
+
+    setTimeout(() => {
+        step1.classList.remove('active');
+        step1.classList.add('complete');
+        step2.classList.add('active');
+    }, 800);
+
+    setTimeout(() => {
+        step2.classList.remove('active');
+        step2.classList.add('complete');
+        step3.classList.add('active');
+    }, 1600);
+
+    setTimeout(() => {
+        step3.classList.remove('active');
+        step3.classList.add('complete');
+    }, 2400);
+
+    // Show celebration with confetti
+    setTimeout(() => {
+        showQuizStep(9);
+        startConfetti();
+    }, 3000);
+}
+
+// ===== Step 9: View Offers Button =====
+document.getElementById('viewOffersBtn').addEventListener('click', function() {
+    unlockResults();
+});
+
+// ===== Show first step =====
+showQuizStep(1);
+    </script>
+</body>
+</html>

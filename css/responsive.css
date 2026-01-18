@@ -1,0 +1,213 @@
+/* ===== Responsive Design ===== */
+
+/* Tablet - 1024px and below */
+@media (max-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-content {
+        gap: 40px;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* Mobile Large - 768px and below */
+@media (max-width: 768px) {
+    /* Navigation */
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: var(--bg-color);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 50px;
+        gap: 0;
+        transition: var(--transition);
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 20px;
+        font-size: 1.2rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* Hero */
+    .hero {
+        min-height: auto;
+        padding: 120px 0 80px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+
+    /* Services */
+    .services {
+        padding: 60px 0;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .service-card {
+        padding: 30px 20px;
+    }
+
+    /* About */
+    .about {
+        padding: 60px 0;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .about-text .section-title {
+        text-align: center;
+    }
+
+    .about-text {
+        text-align: center;
+    }
+
+    .about-image .placeholder-image {
+        height: 300px;
+    }
+
+    /* Contact */
+    .contact {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 30px;
+    }
+}
+
+/* Mobile Small - 480px and below */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .btn {
+        padding: 10px 24px;
+        font-size: 0.9rem;
+    }
+
+    .service-icon {
+        font-size: 2.5rem;
+    }
+
+    .service-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 12px 15px;
+    }
+
+    .about-image .placeholder-image {
+        height: 250px;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: 100px 0 60px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+}
+
+/* High DPI Screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Add high-res image styles here if needed */
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Dark Mode Support (Optional) */
+@media (prefers-color-scheme: dark) {
+    /* Uncomment to enable automatic dark mode
+    :root {
+        --primary-color: #3b82f6;
+        --primary-dark: #2563eb;
+        --text-color: #f1f5f9;
+        --text-light: #94a3b8;
+        --bg-color: #0f172a;
+        --bg-light: #1e293b;
+        --bg-dark: #020617;
+        --border-color: #334155;
+    }
+    */
+}
