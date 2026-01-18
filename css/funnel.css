@@ -1530,9 +1530,9 @@ body {
     }
 }
 
-/* Modal Header - Sticky for scroll */
+/* Modal Header - Trust Header Design */
 .modal-header {
-    padding: 20px 20px 16px;
+    padding: 16px 20px 12px;
     border-bottom: 1px solid var(--gray-200);
     background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
     border-radius: var(--ios-radius) var(--ios-radius) 0 0;
@@ -1540,30 +1540,50 @@ body {
     flex-shrink: 0;
 }
 
-/* New Branding Section - Horizontal Layout */
-.modal-branding {
+/* Centered Logo */
+.modal-logo-wrapper {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-    gap: 16px;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
 .modal-logo-img {
-    max-height: 40px;
+    max-height: 38px;
     width: auto;
     display: block;
+}
+
+/* Trust Bar - 3 Credibility Indicators */
+.modal-trust-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.modal-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #4A5568;
+    white-space: nowrap;
+}
+
+.modal-trust-icon {
+    width: 14px;
+    height: 14px;
+    stroke: #4A5568;
     flex-shrink: 0;
 }
 
-.modal-tagline {
+.modal-trust-sep {
+    color: #CBD5E0;
     font-size: 12px;
-    color: var(--text-gray);
-    font-weight: 500;
-    line-height: 1.3;
-    margin: 0;
-    text-align: right;
-    white-space: nowrap;
+    font-weight: 300;
 }
 
 /* Progress Row with Back Button */
